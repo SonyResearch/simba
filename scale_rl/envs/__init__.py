@@ -5,8 +5,8 @@ from gymnasium.wrappers import RescaleAction, TimeLimit
 
 from scale_rl.envs.dmc import make_dmc_env
 from scale_rl.envs.mujoco import make_mujoco_env
-#from scale_rl.envs.humanoid_bench import make_humanoid_env
-#from scale_rl.envs.myosuite import make_myosuite_env
+from scale_rl.envs.humanoid_bench import make_humanoid_env
+from scale_rl.envs.myosuite import make_myosuite_env
 
 from scale_rl.envs.wrappers import RepeatAction, ScaleReward, DoNotTerminate
 from scale_rl.envs.wrappers.vector import AsyncVectorEnv, SyncVectorEnv, VectorEnv
