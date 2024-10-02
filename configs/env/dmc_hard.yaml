@@ -1,0 +1,17 @@
+##################################################################################
+# Deepmind Control Suite with hard tasks (humanoid & dog)
+##################################################################################
+
+env_type: 'dmc'
+env_name: 'humanoid-walk'
+num_env_steps: 1_000_000
+episodic: false
+
+seed: ${seed}
+num_train_envs: 1
+num_eval_envs: 1
+no_termination: false
+action_repeat: 2
+rescale_action: true
+reward_scale: 1
+max_episode_steps: 1000

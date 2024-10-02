@@ -1,0 +1,35 @@
+##################################################################################
+# Deep Deterministic Policy Gradient (DDPG)
+##################################################################################
+
+agent_type: 'ddpg'
+
+seed: ${seed}
+num_train_envs: ${env.num_train_envs}
+max_episode_steps: ${env.max_episode_steps}
+normalize_observation: false
+
+actor_block_type: 'mlp'
+actor_num_blocks: 1
+actor_hidden_dim: 256
+actor_learning_rate: 3e-4
+actor_weight_decay: 0.0
+
+critic_block_type: 'mlp'
+critic_num_blocks: 1
+critic_hidden_dim: 256
+critic_learning_rate: 3e-4
+critic_weight_decay: 0.0
+critic_use_cdq: true
+
+target_tau: 0.005
+gamma: ${gamma}
+n_step: ${n_step}
+
+exp_noise_color: 0  # 0: gaussian, 1: pink, 2: ou
+exp_noise_scheduler: 'linear'
+exp_noise_decay_period: ${eval:'${num_interaction_steps} / 5'}
+exp_noise_std_init: 0.1
+exp_noise_std_final: 0.1
+
+mixed_precision: false

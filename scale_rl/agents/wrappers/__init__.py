@@ -1,0 +1,1 @@
+from scale_rl.agents.wrappers.normalization import ObservationNormalizer

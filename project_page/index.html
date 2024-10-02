@@ -1,0 +1,347 @@
+<head>
+	<title>SimBa</title>
+	<meta property="og:title" content="SimBa:">
+	<meta property="og:description" content="SimBa: Simplicity Bias for Scaling Parameters in Deep Reinforcement Learning">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript">
+		function toggle(id) {
+			var e = document.getElementById(id);
+			if(e.style.display == 'block')
+				e.style.display = 'none';
+			else
+				e.style.display = 'block';
+		}
+	</script>
+</head>
+<div class="header" id="top">
+	<h1><span class="bold simba">SimBa </span><br/>Simplicity Bias for Scaling Parameters in Deep Reinforcement Learning</h1>
+	<h3><a class="bold default-color">Under review</span><br/></h3>
+	<table class="authors">
+		<tbody>
+			<tr>
+				<td>
+					<h4>
+						<a href="https://joonleesky.github.io" class="nobreak">Hojoon Lee</a><sup>1, 2</sup>&ast;,&ensp;
+						<a href="https://godnpeter.github.io" class="nobreak">Dongyoon Hwang</a><sup>1</sup>&ast;,&ensp;
+						<a class="https://i-am-proto.github.io">Donghu Kim</a><sup>1</sup>&ensp;<br/>
+						<a class="https://mynsng.github.io">Hyunseung Kim</a><sup>1</sup>&ensp;
+						<a class="https://taijunjet.com">Jun Jet Tai</a><sup>2, 3</sup>&ensp;
+						<a class="https://kausubbu.github.io">Kaushik Subramanian</a><sup>2</sup>&ensp;
+						<a class="https://www.pwurman.org">Peter R. Wurman</a><sup>2</sup>&ensp;<br/>
+						<a class="https://sites.google.com/site/jaegulchoo">Jaegul Choo</a><sup>1</sup>&ensp;
+						<a class="https://www.cs.utexas.edu/~pstone/">Peter Stone</a><sup>2, 4</sup>&ensp;
+						<a class="https://takuseno.github.io/">Takuma Seno</a><sup>2</sup>&ensp;
+						
+						<div class="affiliations">
+							<br/>
+							<sup>1</sup> KAIST&ensp;
+							<sup>2</sup> Sony AI&ensp;
+							<sup>3</sup> Coventry University&ensp;
+							<sup>4</sup> UT Austin&ensp;
+						</div>
+						<br/>
+						<span class="authors-affiliation" style="font-size: 0.85em;">&ast;Equal contribution</span>
+					</h4>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="links">
+		<a href="https://arxiv.org" class="btn"><i class="fa">&#xf1c1;</i>&ensp;Paper</a><a href="https://github.com/joonleesky/scale_rl" class="btn"><i class="fa fa-github"></i>&ensp;Code</a>
+	</div>
+</div>
+<div class="content">
+	<div class="tldr-hr"></div>
+	<div class="tldr-container">
+		<h2>TL;DR</h2> 
+		<p class="tldr-content">
+			Stop worrying about algorithms, just <span class="bold">change the network architecture to <span class="bold simba">SimBa</span></span> in deep RL
+		</p>
+	</div>
+	<div class="hr"></div>
+	<div class="figure" style="height: 480px; background-image: url(images/overview.png);"></div>
+	<div style="margin: auto; margin-top: -24px;">
+		<p>
+			<span class="bold simba">Overview.</span> <span class="bold"></span>SimBa</span> infuses <span class="italic">simplicity bias</span> through architectural changes, without modifying the underlying deep RL algorithm.<br/> <span class="bold">(a) SimBa enhaces sample efficiency:</span> Sample efficiency across various RL algorithms, including off-policy model-free (SAC), off-policy model-based (TD-MPC2), on-policy model-free (PPO), and unsupervised (METRA) RL methods. <span class="bold">(b) Off-policy RL Benchmark</span> When applied to SAC, SimBa matches or surpasses state-of-the-art off-policy RL methods with minimal computational overhead across <span class="bold">51</span> continuous control tasks, by only modifying
+			the network architecture and scaling up the number of network parameters.
+		</p>
+	</div>
+	<div class="hr"></div>
+	<div>
+		<h2>Abstract</h2>
+		<p class="abstract">
+			We introduce <span class="bold simba">SimBa</span>, an architecture designed to inject simplicity bias for scaling up the parameters in deep RL. Simba consists of three components: (i) standardizing input observations with running statistics, (ii) incorporating residual feedforward blocks to provide a linear pathway from the input to the output, and (iii) applying layer normalization to control feature magnitudes. By scaling up parameters with SimBa, the sample efficiency of various deep RL algorithms—including <span class=bold>off-policy, on-policy, and unsupervised methods</span>—is consistently improved. Moreover, when SimBa is integrated into SAC, it matches or surpasses state-of-the-art deep RL methods with high computational efficiency across 51 tasks from <span class=bold>DMC, MyoSuite, and HumanoidBench</span>, solely by modifying the network architecture. These results demonstrate SimBa's broad applicability and effectiveness across diverse RL algorithms and environments.
+		</p>
+	</div>
+	<div class="hr"></div>
+	<div>
+		<h2>SimBa Architecture</h2>
+		<div class="figure" style="height: 140px; background-image: url(images/simba_architecture.png);"></div>
+		<div style="margin: auto;">
+		<p class="architecture">
+			SimBa comprises three components: Running Statistics Normalization, Residual Feedforward Blocks, and Post-Layer Normalization. These components lower the network's functional complexity, enhancing generalization for highly overparameterized configurations.
+		</p>
+	</div>
+	<div class="hr"></div>
+	<div>
+		<h2>SimBa with Off-Policy RL</h2>
+		<div class="figure-caption">
+			<p>
+				We evaluate SAC + SimBa on <span class="bold">51</span> control tasks across 3 task domains: <a href="https://arxiv.org/abs/1801.00690">DMC</a>, <a href="https://sites.google.com/view/myosuite">MyoSuite</a>, and <a href="https://humanoid-bench.github.io/">HumanoidBench</a>. 
+			</p>
+		</div>
+		<div class="content-video" style="margin-bottom: 32px">
+			<div class="content-video-container">
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-key-easy.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-reacher-easy.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-humanoid-stand.mp4" type="video/mp4"/>
+				</video>
+				
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-pole.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-acrobot-swingup.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-crawl.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-pen-easy.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-cartpole-balance.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-humanoid-walk.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-balance-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-cartpole-balance-sparse.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-pendulum-swingup.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-key-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-stand.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-cheetah-run.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-dog-trot.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-reach-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-walker-stand.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-obj-easy.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-walker-run.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-dog-walk.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-slide.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-hopper-stand.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-reach-easy.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-run.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-pen-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-hopper-hop.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-finger-spin.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-cartpole-swingup.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-maze.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-sit-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-cartpole-swingup-sparse.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-walk.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-dog-stand.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-finger-turn-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-pose-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-fish-swim.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-walker-walk.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-reacher-hard.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-quadruped-walk.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-stair.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-quadruped-run.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-hurdle.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-dog-run.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-humanoid-run.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-reach.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-pose-easy.mp4" type="video/mp4"/>
+				</video>				
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-sit-simple.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-myo-obj-hard.mp4" type="video/mp4"/>
+				</video>
+				<!--
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-h1-balance-simple.mp4" type="video/mp4"/>
+				</video>
+				<video playsinline="" autoplay="" loop="" preload="" muted="" width="13%">
+					<source src="videos/simba-finger-turn-easy.mp4" type="video/mp4"/>
+				</video>
+				-->
+			</div>
+		</div>
+	</div>
+
+	<div class="hr"></div>
+	<div>
+		<h2>SimBa with On-Policy RL</h2>
+		<div class="figure-caption">
+			<p>
+				Comparison of PPO with and without SimBa for <a href="https://craftaxenv.github.io//">Craftax</a>.
+			</p>
+		</div>
+		<div style="display: flex; justify-content: center; max-width: 900px; margin: 0 auto;">
+			<div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+				<div style="display: flex; justify-content: center; width: 100%;">
+					<div class="figure" style="width: 45%; height: 250px; background-image: url(images/ppo_craftax1.gif); background-size: cover; margin-right: 10px;"></div>
+					<div class="figure" style="width: 45%; height: 250px; background-image: url(images/ppo_craftax2.gif); background-size: cover;"></div>
+				</div>
+				<p style="margin-top: 10px; font-weight: bold;">PPO</p>
+			</div>
+			<div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+				<div style="display: flex; justify-content: center; width: 100%;">
+					<div class="figure" style="width: 45%; height: 250px; background-image: url(images/simba_craftax1.gif); background-size: cover; margin-right: 10px;"></div>
+					<div class="figure" style="width: 45%; height: 250px; background-image: url(images/simba_craftax2.gif); background-size: cover;"></div>
+				</div>
+				<p style="margin-top: 10px; font-weight: bold;">PPO + <span class="bold simba">SimBa</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="hr"></div>
+	<div>
+		<h2>SimBa with Unsupervised RL</h2>
+		<div class="figure-caption">
+			<p>
+				Comparison of METRA with and without SimBa for Humanoid in <a href="https://arxiv.org/abs/1801.00690">DMC</a>.
+			</p>
+		</div>
+		<div style="display: flex; justify-content: center; max-width: 900px; margin: 0 auto;">
+			<div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+				<div style="display: flex; justify-content: center; width: 95%;">
+					<video playsinline="" autoplay="" loop="" preload="" muted="" style="width: 100%;">
+						<source src="videos/metra.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<p style="margin-top: 10px; font-weight: bold;">METRA</p>
+			</div>
+			<div style="display: flex; flex-direction: column; align-items: center; width: 50%;">
+				<div style="display: flex; justify-content: center; width: 95%;">
+					<video playsinline="" autoplay="" loop="" preload="" muted="" style="width: 100%;">
+						<source src="videos/metra_simba.mp4" type="video/mp4"/>
+					</video>
+				</div>
+				<p style="margin-top: 10px; font-weight: bold;">METRA + <span class="bold simba">SimBa</span></p>
+			</div>
+		</div>
+	</div>
+	<div class="hr"></div>
+	<div style="margin: auto; margin-bottom: 64px; text-align: center;">
+		<h2>Paper</h2>
+		<span class="vbold"><span class="vbold simba">SimBa</span>: Simplicity Bias for Scaling Up Parameters for Deep RL</span><br/>
+		<span class="italic">Hojoon Lee&ast;, Dongyoon Hwang&ast;, Donghu Kim,<br/>
+							Hyunseung Kim, Jun Jet Tai, Kaushik Subramanian, Peter R. Wurman,<br/>
+							Jaegul Choo, Peter Stone, Takuma Seno</span><br/><br/>
+		<a href="https://arxiv.org">arXiv preprint</a><br/><br/>
+		<div class="page" style="background-image: url(thumbnails/0.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/1.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/2.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/3.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/4.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/5.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/6.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/7.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/8.png);"></div>
+		<div class="page" style="background-image: url(thumbnails/9.png);"></div>
+		<div style="margin: auto; margin-top: 32px;">
+			<a href="https://arxiv.org/abs/2310.16828">View on arXiv</a>
+		</div>
+	</div>
+	<div class="hr"></div>
+	<div style="padding-bottom: 64px; text-align: center;">
+		<h2>Citation</h2>
+		<p>
+			If you find our work useful, please consider citing the paper as follows:
+		</p>
+		<div id="bibtex-text" class="bibtexsection" onClick="window.getSelection().selectAllChildren(document.getElementById('bibtex-text'));">
+
+</div>
+	</div>
+</div>
+<footer>
+<a href="index.html#top"><i class="fa fa-arrow-up"></i><br/>Return to top</a>
+<div style="padding-top: 48px;">
+	<span>Website based on <a href="https://nicklashansen.github.io/td-mpc2">TD-MPC2</a>.</span>
+</div>
+</footer>

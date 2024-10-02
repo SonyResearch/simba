@@ -1,0 +1,17 @@
+##################################################################################
+# Humanoid Benchmark with Locomotion tasks
+##################################################################################
+
+env_type: 'humanoid_bench'
+env_name: 'h1-walk-v0'
+num_env_steps: 2_000_000
+episodic: true
+
+seed: ${seed}
+num_train_envs: 1
+num_eval_envs: 1
+no_termination: false
+action_repeat: 2
+rescale_action: true
+reward_scale: 1
+max_episode_steps: 1000

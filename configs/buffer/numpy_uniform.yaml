@@ -1,0 +1,9 @@
+buffer_class_type: 'numpy'   # [numpy, jax (distributed-friendly)]
+buffer_type: 'uniform'       # [uniform, prioritized]
+
+n_step: ${n_step}
+gamma: ${gamma}
+max_length: 1_000_000        # maximum buffer size.
+min_length: 5_000            # minimum buffer size (= number of data to collect before training).
+add_batch_size: ${env.num_train_envs}
+sample_batch_size: 256       # batch size for sampling = training.

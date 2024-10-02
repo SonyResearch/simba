@@ -1,0 +1,8 @@
+##################################################################################
+# This agent selects actions randomly. (Useful for debugging purposes.)
+##################################################################################
+
+agent_type: 'random'
+
+seed: ${seed}
+normalize_observation: False

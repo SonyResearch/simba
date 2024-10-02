@@ -1,0 +1,17 @@
+##################################################################################
+# Deepmind Control Suite with easy & medium tasks
+##################################################################################
+
+env_type: 'dmc'
+env_name: 'walker-walk'
+num_env_steps: 500_000
+episodic: false
+
+seed: ${seed}
+num_train_envs: 1
+num_eval_envs: 1
+no_termination: false
+action_repeat: 2
+rescale_action: true
+reward_scale: 1
+max_episode_steps: 1000

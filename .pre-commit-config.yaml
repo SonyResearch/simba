@@ -1,0 +1,21 @@
+---
+repos:
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.2.5
+    hooks:
+      - id: codespell  # english spelling check
+        args: [
+          --ignore-words-list=null 
+        ]
+        exclude: ^(.*\.ipynb)$
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.2.1
+    hooks:
+      - id: ruff      # code formatting check.
+        args: [ 
+          --fix,      # applies formatting automatically.
+          --select=I, # import-sort (library import is automatically sorted)
+        ]
+        exclude: ^.*__init__\.py$
+      - id: ruff-format
+        exclude: ^.*__init__\.py$
