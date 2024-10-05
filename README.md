@@ -11,7 +11,7 @@ We provide a `Dockerfile` for easy installation. You can build the docker image 
 
 ```
 docker build . -t simba .
-docker run -v .:/home/user/simba -it simba /bin/bash
+docker run --gpus all -v .:/home/user/simba -it simba /bin/bash
 ```
 
 ### Pip/Conda
