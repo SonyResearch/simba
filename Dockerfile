@@ -61,19 +61,14 @@ RUN useradd --create-home \
     --groups dialout,audio,video,plugdev \
     --uid 1000 \
     user
-
 USER root
 WORKDIR /home/user
-
 RUN chown -R user:user /home/user && \
     chmod -R u+rwx /home/user
 USER 1000
 
-#COPY mjkey.txt /home/user/.mujoco/mjkey.txt
-#COPY ./nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
-COPY requirements.txt /home/user/requirements.txt
-
 # Install packages
+COPY requirements.txt /home/user/requirements.txt
 RUN python3.10 -m venv /home/user/venv && \
     . /home/user/venv/bin/activate && \
     pip install -r requirements.txt && \
