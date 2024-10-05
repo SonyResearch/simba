@@ -22,7 +22,7 @@ If you prefer to install dependencies manually, start by installing dependencies
 pip install -e .
 
 # Or use conda
-conda env create -f environment.yaml
+conda env create -f deps/environment.yaml
 ```
 
 #### (optional) Jax for GPU
@@ -85,8 +85,14 @@ bash scripts/sac_simba_myosuite.sh
 
 ## Analysis
 
-Please refer to `analysis/benchmark.ipynb` to analyze the exprimental results provided in the paper.
+Please refer to `analysis/benchmark.ipynb` to analyze the experimental results provided in the paper.
 
+## Development
+Configure development dependencies:
+```
+pip install -r deps/dev.requirements.txt
+pre-commit install
+```
 
 ## License
 This project is released under the [Apache 2.0 license](/LICENSE).

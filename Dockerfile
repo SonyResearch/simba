@@ -68,7 +68,7 @@ RUN chown -R user:user /home/user && \
 USER 1000
 
 # Install packages
-COPY requirements.txt /home/user/requirements.txt
+COPY deps/requirements.txt /home/user/requirements.txt
 RUN python3.10 -m venv /home/user/venv && \
     . /home/user/venv/bin/activate && \
     pip install -r requirements.txt && \

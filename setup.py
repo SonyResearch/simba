@@ -1,7 +1,6 @@
 from setuptools import find_packages, setup
 
-
-with open('requirements.txt') as f:
+with open("deps/requirements.txt") as f:
     install_requires = f.read()
 
 
