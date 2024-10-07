@@ -9,7 +9,7 @@ if __name__ == "__main__":
         name="simba",
         version="0.1.0",
         url="https://github.com/SonyResearch/simba",
-        license="MIT License",
+        license="Apache License 2.0",
         install_requires=install_requires,
         packages=find_packages(),
         python_requires=">=3.9.0",
