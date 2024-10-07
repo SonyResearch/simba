@@ -6,7 +6,7 @@ with open("deps/requirements.txt") as f:
 
 if __name__ == "__main__":
     setup(
-        name="simba",
+        name="scale_rl",
         version="0.1.0",
         url="https://github.com/SonyResearch/simba",
         license="Apache License 2.0",
