@@ -1,4 +1,4 @@
-# Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
+# SimBa: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
 
 This is a repository of an official implementation of Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning.
 
@@ -10,8 +10,8 @@ This is a repository of an official implementation of Simba: Simplicity Bias for
 We provide a `Dockerfile` for easy installation. You can build the docker image by running
 
 ```
-docker build . -t simba .
-docker run --gpus all -v .:/home/user/simba -it simba /bin/bash
+docker build . -t scale_rl .
+docker run --gpus all -v .:/home/user/scale_rl -it scale_rl /bin/bash
 ```
 
 ### Pip/Conda
@@ -66,7 +66,7 @@ To run a single experiment
 python run.py
 ```
 
-To benchmark a simba with running all environments
+To benchmark the algorithm with all environments
 ```
 python run_parallel.py \
     --task all \
