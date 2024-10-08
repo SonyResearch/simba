@@ -1,5 +1,4 @@
 import gymnasium as gym
-import humanoid_bench
 import numpy as np
 from gymnasium import spaces
 
@@ -147,6 +146,8 @@ def make_humanoid_env(
     seed: int,
     monitor_episode: bool = True,
 ) -> gym.Env:
+    import humanoid_bench
+
     additional_kwargs = {}
     if env_name == "h1hand-package-v0":
         additional_kwargs = {"policy_path": None}

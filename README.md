@@ -1,15 +1,6 @@
-# Simba
+# Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
 
-Official implementation of 
-
-
-Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
-
-
-
-
-## Overview
-
+This is a repository of an official implementation of Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning.
 
 
 ## Getting strated
@@ -19,40 +10,38 @@ Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
 We provide a `Dockerfile` for easy installation. You can build the docker image by running
 
 ```
-cd deps
-docker build -t scale_rl .
-cd ../
-docker run -i -d --gpus all -v .:/home/user/scale_rl -t scale_rl
-docker exec -it <image_id> /bin/bash
+docker build . -t simba .
+docker run --gpus all -v .:/home/user/simba -it simba /bin/bash
 ```
 
-### Conda
+### Pip/Conda
 
 If you prefer to install dependencies manually, start by installing dependencies via conda by following the guidelines.
+```
+# Use pip
+pip install -e .
 
-Create conda environment
-```
-cd deps
-conda env create -f environment.yaml
+# Or use conda
+conda env create -f deps/environment.yaml
 ```
 
-Install Jax-GPU
+#### (optional) Jax for GPU
 ```
-RUN pip install -U "jax[cuda12]==0.4.25" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+pip install -U "jax[cuda12]==0.4.25" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+# If you want to execute multiple runs with a single GPU, we recommend to set this variable.
+export XLA_PYTHON_CLIENT_PREALLOCATE=false
 ```
 
 #### Mujoco
-
+Please see installation instruction at [MuJoCo](https://github.com/google-deepmind/mujoco).
 ```
-Please refer to https://github.com/google-deepmind/mujoco
-
-# Headless rendering
+# Additional environmental evariables for headless rendering
 export MUJOCO_GL="egl"
 export MUJOCO_EGL_DEVICE_ID="0"
 export MKL_SERVICE_FORCE_INTEL="0"
 ```
 
-#### Humanoid Bench
+#### (optional) Humanoid Bench
 
 ```
 git clone https://github.com/joonleesky/humanoid-bench
@@ -60,8 +49,7 @@ cd humanoid-bench
 pip install -e .
 ```
 
-#### Myosuite
-
+#### (optional) Myosuite
 ```
 git clone --recursive https://github.com/joonleesky/myosuite
 cd myosuite
@@ -99,8 +87,17 @@ bash scripts/sac_simba_myosuite.sh
 
 ## Analysis
 
-Please refer to `analysis/benchmark.ipynb` to analyze the exprimental results provided in the paper.
+Please refer to `analysis/benchmark.ipynb` to analyze the experimental results provided in the paper.
 
+## Development
+Configure development dependencies:
+```
+pip install -r deps/dev.requirements.txt
+pre-commit install
+```
+
+## License
+This project is released under the [Apache 2.0 license](/LICENSE).
 
 ## Citation
 
