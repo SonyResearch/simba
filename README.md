@@ -1,6 +1,6 @@
-# Simba
+# Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
 
-Official implementation of Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
+This is a repository of an official implementation of Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning.
 
 
 ## Getting strated
@@ -28,6 +28,8 @@ conda env create -f deps/environment.yaml
 #### (optional) Jax for GPU
 ```
 pip install -U "jax[cuda12]==0.4.25" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+# If you want to execute multiple runs with a single GPU, we recommend to set this variable.
+export XLA_PYTHON_CLIENT_PREALLOCATE=false
 ```
 
 #### Mujoco

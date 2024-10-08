@@ -1,4 +1,4 @@
-name: rl_playground
+name: scale_rl
 channels:
   - nvidia
   - conda-forge
