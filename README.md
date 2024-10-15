@@ -19,13 +19,17 @@ This is a repository of an official implementation of
 
 [[Website]](https://sonyresearch.github.io/simba) [[Paper]](https://arxiv.org/abs/2410.09754)
 
+## TL;DR
+
+Stop worrying about algorithms, just change the network architecture to SimBa.
+
 ## Overview
 
 SimBa is a network architecture designed for RL that avoids overfitting by embedding simplicity bias.
 
 <img src="docs/images/simba_architecture.png" alt="Image description" width="700">
 
-When integrated with Soft Actor Critic (SAC), SAC + SimBa matches performance to state-of-the-art off-policy algorithms by only changing the network architecture.
+When integrated SimBA with Soft Actor Critic (SAC), it matches the performance of state-of-the-art RL algorithms.
 
 <img src="docs/images/overview.png" alt="Image description" width="800">
 
