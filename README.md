@@ -29,7 +29,7 @@ Stop worrying about algorithms, just change the network architecture to SimBa.
 
 SimBa is a network architecture designed for RL that avoids overfitting by embedding simplicity bias.
 
-<img src="docs/images/simba_architecture.png" alt="Image description" width="700">
+<img src="docs/images/simba_architecture.png" alt="Image description" width="800">
 
 ### Results
 
