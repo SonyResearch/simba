@@ -1,6 +1,33 @@
-# SimBa: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning
+# SimBa: Simplicity Bias for Scaling Up Parameters in Deep RL
 
-This is a repository of an official implementation of Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning.
+This is a repository of an official implementation of 
+
+<i>Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning </i> by
+
+<a href="https://joonleesky.github.io">Hojoon Lee</a>,
+<a href="https://godnpeter.github.io">Dongyoon Hwang</a>,
+<a href="https://i-am-proto.github.io">Donghu Kim</a>,
+<a href="https://mynsng.github.io">Hyunseung Kim</a>,
+<a href="https://taijunjet.com">Jun Jet Tai</a>,
+<a href="https://kausubbu.github.io">Kaushik Subramanian</a>, 
+
+<a href="https://www.pwurman.org">Peter R. Wurman</a>,
+<a href="https://sites.google.com/site/jaegulchoo">Jaegul Choo</a>,
+<a href="https://www.cs.utexas.edu/~pstone/">Peter Stone</a>,
+<a href="https://takuseno.github.io/">Takuma Seno</a>.
+
+
+[[Website]](https://sonyresearch.github.io/simba) [[Paper]](https://arxiv.org/abs/2410.09754)
+
+## Overview
+
+SimBa is a network architecture designed for RL that avoids overfitting by embedding simplicity bias.
+
+<img src="docs/images/simba_architecture.png" alt="Image description" width="700">
+
+When integrated with Soft Actor Critic (SAC), SAC + SimBa matches performance to state-of-the-art off-policy algorithms by only changing the network architecture.
+
+<img src="docs/images/overview.png" alt="Image description" width="800">
 
 
 ## Getting strated
@@ -105,8 +132,9 @@ If you find our work useful, please consider citing our paper as follows:
 
 ```
 @article{lee2024simba,
-  title={Simba: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning}, 
-  author={Hojoon Lee and Dongyoon Hwang and Donghu Kim and Hyunseung Kim and Jun Jet Tai and Kaushik Subramanian and Peter R.Wurman and Jaegul Choo and Peter Stone and Takuma Seno},
+  title={SimBa: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning}, 
+  author={Hojoon Lee and Dongyoon Hwang and Donghu Kim and Hyunseung Kim and Jun Jet Tai and Kaushik Subramanian and Peter R. Wurman and Jaegul Choo and Peter Stone and Takuma Seno},
+  journal={arXiv preprint arXiv:2410.09754},
   year={2024}
 }
 ```
