@@ -1,4 +1,4 @@
-# SimBa: Simplicity Bias for Scaling Up Parameters in Deep RL
+# SimBa: Simplicity Bias for Scaling Up Parameters in Deep RL (ICLR'25 spotlight)
 
 This is a repository of an official implementation of 
 
@@ -17,7 +17,7 @@ This is a repository of an official implementation of
 <a href="https://takuseno.github.io/">Takuma Seno</a>.
 
 
-[[Website]](https://sonyresearch.github.io/simba) [[Paper]](https://arxiv.org/abs/2410.09754)
+[[Website]](https://sonyresearch.github.io/simba) [[Paper]](https://openreview.net/forum?id=jXLiDKsuDo)
 
 ## Overview
 
@@ -139,10 +139,12 @@ This project is released under the [Apache 2.0 license](/LICENSE).
 If you find our work useful, please consider citing our paper as follows:
 
 ```
-@article{lee2024simba,
-  title={SimBa: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning}, 
-  author={Hojoon Lee and Dongyoon Hwang and Donghu Kim and Hyunseung Kim and Jun Jet Tai and Kaushik Subramanian and Peter R. Wurman and Jaegul Choo and Peter Stone and Takuma Seno},
-  journal={arXiv preprint arXiv:2410.09754},
-  year={2024}
+@inproceedings{
+    lee2025simba,
+    title={SimBa: Simplicity Bias for Scaling Up Parameters in Deep Reinforcement Learning},
+    author={Hojoon Lee and Dongyoon Hwang and Donghu Kim and Hyunseung Kim and Jun Jet Tai and Kaushik Subramanian and Peter R. Wurman and Jaegul Choo and Peter Stone and Takuma Seno},
+    booktitle={The Thirteenth International Conference on Learning Representations},
+    year={2025},
+    url={https://openreview.net/forum?id=jXLiDKsuDo}
 }
 ```
